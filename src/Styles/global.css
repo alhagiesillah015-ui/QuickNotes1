@@ -1,0 +1,95 @@
+/* Page */ 
+body { 
+    margin: 0; 
+    font-family: Arial , sans-serif; 
+    background: #f1f5f9;
+ }
+
+ .container {
+     width: 100%;
+     max-width: 480px;
+      margin: 60px auto; 
+      padding: 20px; 
+    }
+
+
+.card {
+     background: white; 
+      
+    padding: 30px;
+     border-radius: 12px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); 
+        }
+
+      .card h2 {
+       text-align: center;
+       background-color: #2563eb; 
+       color: white;
+        padding: 15px; 
+        margin: -30px -30px 25px; 
+        border-radius: 12px 12px 0 0;
+     }
+
+     form { 
+    display: flex; 
+    flex-direction: column;
+     gap: 15px;
+     }
+
+     form input { 
+        width: 100%;
+         box-sizing: border-box;
+          padding: 12px 14px;
+           border: 1px solid #cbd5e1;
+            border-radius: 8px; 
+            font-size: 16px;
+             outline: none;
+             }
+
+
+   form input:focus {
+     border-color: #2563eb; 
+     box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15); 
+    }
+  form button { 
+    padding: 12px;
+ background-color: #2563eb;
+ color: white;
+ border: none;
+ border-radius: 8px;
+ font-size: 16px; 
+   
+ font-weight: bold; 
+
+ cursor: pointer; 
+ transition: 0.3s; 
+}
+ form button:hover
+  { 
+    background-color: #1d4ed8;
+ }
+
+ form button:disabled {
+     background-color: #94a3b8;
+      cursor: not-allowed;
+     }
+.msg {
+     text-align: center;
+     margin-top:
+      15px; color: #dc2626;
+       font-size: 14px;
+     }
+
+.small { text-align: center;
+     margin-top: 20px;
+      color: #64748b; 
+      font-size: 20px;
+     }
+ .small a {
+     color: #2563eb;
+      text-decoration: none;
+       font-weight: bold; 
+    }
+.small a:hover {
+     text-decoration: underline;
+     }
