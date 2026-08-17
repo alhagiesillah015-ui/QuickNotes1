@@ -75,14 +75,13 @@ function Signup() {
 
           </div>
 
-          {/* Error message */}
+          
           {error && (
             <div className="bg-red-50 text-red-700 p-3 rounded-md mb-4 text-sm">
               {error}
             </div>
           )}
 
-          {/* Signup form */}
           <form
             onSubmit={handleSubmit}
             className="w-full"

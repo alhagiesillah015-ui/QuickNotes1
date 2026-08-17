@@ -12,7 +12,7 @@ function Login() {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  // ONLY ONE handleSubmit
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
 

@@ -1,12 +1,27 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Notebook, LogOut ,User } from "lucide-react";
+import { Notebook, LogOut, User  } from "lucide-react";
+import { useAuth } from "../Context/AuthContext";
+
 
 
 
 function Navbar(){
 
-    const Navigate = useNavigate();
+   const navigate = useNavigate();
+const { currentUser, loading, logout } = useAuth();
+
+
+
+    const handlelogout = async()=>{
+        try{
+            await logout();
+
+            navigate("/login")
+        }catch(error){
+            console.error("Failed to logout", error)
+        }
+    }
 
 
     return(
@@ -22,7 +37,26 @@ function Navbar(){
 
 
                 <div className="flex items-center space-x-4">
-                    <div className="space-x-4">
+                    {
+                        currentUser ? (
+                        <>
+                        <div className="flex items-center text-sm 
+                        text-gray-600">
+                            <User className="h-4 w-4 mr-1"/>
+                            <span className="hiden md:inline">{currentUser.email}</span>
+                              
+                        </div>
+
+                        <button onClick={handlelogout} className="flex 
+                        items-center text-sm font-medium text-gray-600
+                        hover:text-indigo-600 transition-colors">
+
+                            <LogOut className="h-4 w-4 mr-1"/>
+                            <span>logout</span>
+                        </button>
+                        </>
+                    ) : (
+                        <div className="space-x-4">
                         <Link 
                         to="login"
                          className="text-sm font-medium text-gray-600
@@ -30,8 +64,7 @@ function Navbar(){
                          >
                         Login
                          </Link>
-                    </div>
-                    <div>
+                   
                         <Link
                          to="signup"
                          className="text-sm font-medium text-white px-4
@@ -41,6 +74,10 @@ function Navbar(){
                             Signup
                         </Link>
                     </div>
+                    )
+
+                    }
+                    
                 </div>
             </div>
         </di>
