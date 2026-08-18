@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Notebook } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
+
 import { useAuth } from "../Context/AuthContext";
 
 function Login() {
@@ -12,14 +13,14 @@ function Login() {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     setError("");
 
     if (!email || !password) {
-      return setError("Please enter your email and password");
+      setError("Please enter your email and password.");
+      return;
     }
 
     try {
@@ -27,12 +28,21 @@ function Login() {
 
       await login(email, password);
 
-      navigate("/dashboard");
+      navigate("/dashboard", { replace: true });
     } catch (err) {
-      setError(
-        "Failed to sign in: " +
-          (err.message || "Please check your email and password")
-      );
+      console.error("Login error:", err);
+
+      if (err.code === "auth/invalid-credential") {
+        setError("Incorrect email or password.");
+      } else if (err.code === "auth/user-not-found") {
+        setError("No account exists with this email.");
+      } else if (err.code === "auth/wrong-password") {
+        setError("Incorrect password.");
+      } else {
+        setError(
+          err.message || "Failed to sign in."
+        );
+      }
     } finally {
       setLoading(false);
     }
@@ -41,7 +51,6 @@ function Login() {
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
       <div className="w-full max-w-md">
-
         <div className="bg-white rounded-lg shadow-md p-8">
 
           <div className="flex flex-col items-center mb-6">
@@ -64,7 +73,6 @@ function Login() {
 
           <form onSubmit={handleSubmit}>
 
-            {/* Email */}
             <div className="mb-4">
               <label
                 htmlFor="email"
@@ -83,7 +91,6 @@ function Login() {
               />
             </div>
 
-            {/* Password */}
             <div className="mb-4">
               <label
                 htmlFor="password"
@@ -102,20 +109,19 @@ function Login() {
               />
             </div>
 
-            {/* Submit */}
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-indigo-500 text-white py-3 px-4 rounded-lg font-semibold hover:bg-indigo-600 transition duration-200 shadow-md disabled:opacity-50"
+              className="w-full bg-indigo-500 text-white py-3 px-4 rounded-lg font-semibold hover:bg-indigo-600 transition disabled:opacity-50"
             >
               {loading ? "Signing In..." : "Sign In"}
             </button>
-
           </form>
 
           <div className="mt-4 text-center">
             <p className="text-gray-600">
               Don't have an account?{" "}
+
               <Link
                 to="/signup"
                 className="text-indigo-600 font-semibold hover:underline"
