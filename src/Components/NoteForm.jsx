@@ -103,7 +103,7 @@ function NoteForm(){
                 <textarea
                 id='content'
                 type='content'
-                value={title}
+                value={content}
                 onChange={(e)=>setContent(e.target.value)}
                 className='w-full px-3 py-2 boder 
                 boder-gray-300 rounded-md focus:outline-none
